@@ -14,5 +14,9 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    // Dashboard routes
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Logout routes
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
