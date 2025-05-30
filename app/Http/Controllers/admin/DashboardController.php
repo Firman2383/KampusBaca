@@ -13,6 +13,6 @@ class DashboardController extends Controller
             'title' => 'Dashboard'
         ];
 
-        return view('layouts.template-admin', $data);
+        return view('admin.dashboard.index', $data);
     }
 }
