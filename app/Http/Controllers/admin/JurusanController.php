@@ -24,12 +24,12 @@ class JurusanController extends Controller
         return view('admin.jurusan.index', $data);
     }
 
-    public function store(Request $request, $fakultas)
+    public function store(Request $request, Fakultas $fakultas)
     {
         $fakultasModel = Fakultas::where('slug', $fakultas)->firstOrFail();
 
         $request->validate([
-            'nama_jurusan' => 'required|string|max:255|unique:jurusan,nama_jurusan',
+            'nama_jurusan' => 'required|string|max:255|unique:jurusans,nama_jurusan',
         ], [
             'nama_jurusan.required' => 'Nama jurusan tidak boleh kosong, ya. Mohon diisi.',
             'nama_jurusan.string'   => 'Format nama jurusan sepertinya keliru, seharusnya berupa teks.',

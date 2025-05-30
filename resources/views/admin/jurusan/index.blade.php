@@ -38,78 +38,75 @@
                 </button>
             </div>
         @endif
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div>
-                    <h5>Data {{ $title }} {{ $fakultas->nama_fakultas }}</h5>
-                    <small>Berikut adalah data {{ $title }} {{ $fakultas->nama_fakultas }} yang ada di
-                        KampusBaca</small>
-                </div>
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                    data-bs-target="#tambahJurusan{{ $fakultas->id }}">
-                    Tambah {{ $title }} {{ $fakultas->nama_fakultas }}
-                </button>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="basic-1" class="display">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama jurusan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($jurusan as $item)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $item->nama_jurusan }}</td>
-                                    <td>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#editJurusan{{ $item->id }}">
-                                            Edit
-                                        </button>
-                                        <button class="btn btn-danger" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#hapusJurusan{{ $item->id }}">
-                                            Hapus
-                                        </button>
-                                    </td>
-                                </tr>
-                                @include('admin.jurusan.modal')
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{--  Modal Tambah  --}}
-    <div class="modal fade" id="tambahJurusan{{ $fakultas->id }}" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="{{ route('jurusan.store', ['fakultas' => $fakultas->slug]) }}" method="POST">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title">Form {{ $title }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"></span>
-                        </button>
+        <div class="row g-3">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Form {{ $title }} {{ $fakultas->nama_fakultas }}</h5>
+                        <small>
+                            Silahkan isi form berikut untuk menambahkan {{ $title }} baru pada
+                            {{ $fakultas->nama_fakultas }}
+                        </small>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nama_jurusan" class="col-form-label">Nama Jurusan:</label>
-                            <input type="text" class="form-control" Value="{{ old('nama_jurusan') }}"
-                                name="nama_jurusan" id="nama_jurusan" required>
+                    <div class="card-body">
+                        <form action="{{ route('jurusan.store', ['fakultas' => $fakultas->slug]) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="nama_jurusan" class="col-form-label">Nama Jurusan:</label>
+                                <input type="text" class="form-control" Value="{{ old('nama_jurusan') }}"
+                                    name="nama_jurusan" id="nama_jurusan" required>
+                            </div>
+                            <div class="form-group mt-3">
+                                <button class="btn btn-primary" type="submit">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>Data {{ $title }} {{ $fakultas->nama_fakultas }}</h5>
+                            <small>
+                                Berikut adalah data {{ $title }} {{ $fakultas->nama_fakultas }} yang ada di KampusBaca
+                            </small>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="basic-1" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama jurusan</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach ($jurusan as $item)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $item->nama_jurusan }}</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#editJurusan{{ $item->id }}">
+                                                    Edit
+                                                </button>
+                                                <button class="btn btn-danger" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#hapusJurusan{{ $item->id }}">
+                                                    Hapus
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @include('admin.jurusan.modal')
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

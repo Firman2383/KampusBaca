@@ -1,5 +1,4 @@
 
-
 {{--  Modal Edit  --}}
 <div class="modal fade" id="editJurusan{{ $item->id }}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
